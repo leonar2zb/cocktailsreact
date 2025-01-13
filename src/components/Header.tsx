@@ -1,5 +1,9 @@
-import { NavLink } from "react-router-dom"
+import { useMemo } from "react"
+import { NavLink, useLocation } from "react-router-dom"
 export default function Header() {
+    const { pathname } = useLocation()
+    const isHome = useMemo(() => pathname === '/', [pathname])
+    console.log((isHome ? 'Si' : 'No') + ' está en el Home')
     return (
         <header className="bg-slate-800">
             <div className="mx-auto container px-5 py-16">
