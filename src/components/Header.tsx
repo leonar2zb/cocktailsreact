@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { ChangeEvent, useEffect, useMemo, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { useAppStore } from "../stores/useAppStore"
 
@@ -6,7 +6,19 @@ export default function Header() {
     const { pathname } = useLocation()
     const isHome = useMemo(() => pathname === '/', [pathname])
 
-    const { fetchCategories, categories } = useAppStore()
+    const [searchFilter, setSearchFilter] = useState({
+        ingredient: '',
+        category: ''
+    })
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+        setSearchFilter({
+            ...searchFilter,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const { fetchCategories, categories: { drinks } } = useAppStore()
     useEffect(() => {
         fetchCategories()
     }, [])
@@ -35,7 +47,10 @@ export default function Header() {
                             >Nombre o ingredientes</label>
                             <input type="text" name="ingredient" id="ingredient"
                                 className="p-3 w-full rounded-lg focus:outline-none"
-                                placeholder="Nombre o ingredientes ej: Café, Whisky" />
+                                placeholder="Nombre o ingredientes ej: Café, Whisky"
+                                onChange={handleChange}
+                            />
+
                         </div>
                         <div className="space-y-4">
                             <label htmlFor="category"
@@ -43,8 +58,12 @@ export default function Header() {
                             >Nombre o categoría</label>
                             <select name="category" id="category"
                                 className="p-3 w-full rounded-lg focus:outline-none"
+                                onChange={handleChange}
                             >
                                 <option value="">--Seleccione categoría--</option>
+                                {drinks.map(cat => (
+                                    <option value={cat.strCategory} key={cat.strCategory}>{cat.strCategory}</option>
+                                ))}
                             </select>
                         </div>
                         <input type="submit" value="Buscar receta"
