@@ -16,7 +16,4 @@ export async function getRecipes(filter: SearchFilterType) {
     const result = drinks.safeParse(data)
     if (result.success)
         return result.data
-    else
-        return 'Formato no válido'
-
 }
