@@ -8,3 +8,10 @@ export const CategoriesAPIResponse = z.object({
 })
 
 export type CategoriesAPIResponseType = z.infer<typeof CategoriesAPIResponse>
+
+export const SearchFilter = z.object({
+    ingredient: z.string(),
+    category: z.string()
+})
+
+export type SearchFilterType = z.infer<typeof SearchFilter>
