@@ -1,5 +1,5 @@
 import axios from "axios"
-import { API, CategoriesAPIResponse, drinks, DrinkType, RecipeAPIResponse, SearchFilterType } from "../types"
+import { CategoriesAPIResponse, drinks, DrinkType, RecipeAPIResponse, SearchFilterType } from "../types"
 
 export async function getCategories() {
     const url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list'
