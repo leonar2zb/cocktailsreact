@@ -43,7 +43,7 @@ export const createRecipesSlice: StateCreator<RecipesSliceType> = (set) => ({
     closeModal: () => {
         set({
             modal: false,
-            recipe: {} as RecipeType
+            //recipe: {} as RecipeType comentado para evitar el flickering al ocultar diálogo            
         })
     }
 })
