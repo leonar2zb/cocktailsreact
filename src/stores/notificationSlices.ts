@@ -29,7 +29,7 @@ export const createNotificationsSlice: StateCreator<NotificationSliceType> = (se
         })
         setTimeout(() => {
             get().closeNotification()
-        }, 4000)
+        }, 3500)
     },
     closeNotification: () => {
         set({ notification: { ...get().notification, show: false } })

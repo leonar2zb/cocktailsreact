@@ -22,13 +22,13 @@ export default function Header() {
         e.preventDefault()
 
         if (Object.values(searchFilter).includes('')) {
-            console.log('Todos los campos son obligatorios')
+            showNotification({ text: 'Todos los campos son obligatorios', error: true })
             return
         }
         searchRecipes(searchFilter)
     }
 
-    const { fetchCategories, categories: { drinks }, searchRecipes } = useAppStore()
+    const { fetchCategories, categories: { drinks }, searchRecipes, showNotification } = useAppStore()
     useEffect(() => {
         fetchCategories()
     }, [])
