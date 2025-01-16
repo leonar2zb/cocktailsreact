@@ -24,7 +24,7 @@ export default function DrinkCard({ drink }: drinkProp) {
                     {drink.strDrink}
                 </h2>
                 <button type="button"
-                    onClick={e => (handleButton(drink.idDrink))}
+                    onClick={() => (handleButton(drink.idDrink))}
                     className="bg-orange-400 hover:bg-orange-500 mt-5 w-full p-3 font-bold text-white text-lg">
                     Ver receta
                 </button>
