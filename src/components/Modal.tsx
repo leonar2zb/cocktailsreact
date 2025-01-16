@@ -4,7 +4,7 @@ import { useAppStore } from '../stores/useAppStore';
 import { RecipeType } from '../types';
 
 export default function Modal() {
-    const { modal, closeModal, recipe, handleClickFavorite, hasReceipe } = useAppStore()
+    const { modal, closeModal, recipe, handleClickFavorite, hasReceipe, showNotification } = useAppStore()
 
     const renderIngredients = () => {
         const ingredients: JSX.Element[] = []
@@ -77,6 +77,8 @@ export default function Modal() {
                                             onClick={() => {
                                                 handleClickFavorite(recipe)
                                                 closeModal()
+                                                const text = (hasReceipe(recipe.idDrink)) ? 'Ha sido agregado a favoritos' : 'Eliminado de favoritos'
+                                                showNotification({ text })
                                             }}
                                         >
                                             {hasReceipe(recipe.idDrink) ? 'Eliminar de ' : 'Agregar a '}

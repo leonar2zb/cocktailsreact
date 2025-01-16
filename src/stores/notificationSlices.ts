@@ -6,7 +6,11 @@ type Notification = {
     show: boolean
 }
 export type NotificationSliceType = {
-    notification: Notification
+    notification: Notification,
+    //showNotification: (payload: Pick<Notification, 'text' | 'error'>) => void, ambos parámetros obligatorios
+    //hacer opcional error y establecerlo en false por defecto
+    showNotification: (payload: Pick<Notification, 'text'> & Partial<Pick<Notification, 'error'>>) => void,
+    closeNotification: () => void
 }
 
 export const createNotificationsSlice: StateCreator<NotificationSliceType> = (set, get) => ({
@@ -14,5 +18,20 @@ export const createNotificationsSlice: StateCreator<NotificationSliceType> = (se
         text: '',
         error: false,
         show: false
+    },
+    showNotification: ({ text, error = false }) => {
+        set({
+            notification: {
+                text,
+                error,
+                show: true
+            }
+        })
+        setTimeout(() => {
+            get().closeNotification()
+        }, 4000)
+    },
+    closeNotification: () => {
+        set({ notification: { ...get().notification, show: false } })
     }
 })
